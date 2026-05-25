@@ -1,9 +1,8 @@
 # Thermal and Structural Feasibility of an Uncooled SS316 Conical Convergent-Divergent Nozzle
 
+The study answers a single question: **can SS316 survive the combined thermal and pressure loading at the design operating point?**
 
-Multiphysics analysis of an uncooled stainless-steel converging-diverging nozzle. The study answers a single question: **can SS316 survive the combined thermal and pressure loading at the design operating point?**
-
-The short answer is *yes against yield, no against creep*, and the engineering value of the project is in showing why that distinction matters for material selection.
+The short answer is *yes against yield, not against creep*, and the engineering value of the project is in showing why that distinction matters for material selection.
 
 ---
 
