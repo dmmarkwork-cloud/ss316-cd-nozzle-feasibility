@@ -1,0 +1,254 @@
+
+Boundary Conditions                          
+-------------------                          
+
+  Axis                                       
+  ----                                         
+
+    left_side_axis                           
+    --------------                               
+
+    right_side_axis                          
+    ---------------                              
+
+  Pressure Inlet                             
+  --------------                               
+
+    inlet                                    
+    -----                                        
+
+      Momentum                               
+      --------                                     
+
+
+        Gauge Total Pressure                 
+        --------------------                         
+
+
+          Value                               : 1900000 [Pa]
+
+        Supersonic/Initial Gauge Pressure    
+        ---------------------------------            
+
+
+          Value                               : 1893000 [Pa]
+
+        Direction Specification Method        : Normal to Boundary
+
+
+      Turbulence                             
+      ----------                                   
+
+        Specification Method                  : Intensity and Viscosity Ratio
+
+        Turbulent Intensity                   : 1 [%]
+
+
+      Thermal                                
+      -------                                      
+
+        Total Temperature                    
+        -----------------                            
+
+
+          Value                               : 800 [K]
+
+  Pressure Outlet                            
+  ---------------                              
+
+    outlet                                   
+    ------                                       
+
+      Momentum                               
+      --------                                     
+
+
+        Gauge Pressure                       
+        --------------                               
+
+
+          Value                               : -40000 [Pa]
+
+
+        Backflow Direction Specification Method-2_ : Normal to Boundary
+
+        Backflow Pressure Specification       : Static Pressure
+
+
+
+
+
+      Turbulence                             
+      ----------                                   
+
+        Specification Method                  : Intensity and Viscosity Ratio
+
+
+
+      Thermal                                
+      -------                                      
+
+        Backflow Total Temperature           
+        --------------------------                   
+
+
+
+  Wall                                       
+  ----                                         
+
+    chamber_wall                             
+    ------------                                 
+
+      Momentum                               
+      --------                                     
+
+
+
+      Turbulence                             
+      ----------                                   
+
+
+        Roughness Height                     
+        ----------------                             
+
+
+
+        Roughness Constant                   
+        ------------------                           
+
+
+
+      Thermal                                
+      -------                                      
+
+
+
+        Heat Flux                            
+        ---------                                    
+
+
+
+        Wall Thickness                       
+        --------------                               
+
+
+
+        Heat Generation Rate                 
+        --------------------                         
+
+
+
+        Convective Augmentation Factor       
+        ------------------------------               
+
+
+
+    convergin_throat_diverging               
+    --------------------------                   
+
+      Momentum                               
+      --------                                     
+
+
+
+      Turbulence                             
+      ----------                                   
+
+
+        Roughness Height                     
+        ----------------                             
+
+
+
+        Roughness Constant                   
+        ------------------                           
+
+
+
+      Thermal                                
+      -------                                      
+
+
+
+        Heat Flux                            
+        ---------                                    
+
+
+
+        Wall Thickness                       
+        --------------                               
+
+
+
+        Heat Generation Rate                 
+        --------------------                         
+
+
+
+        Convective Augmentation Factor       
+        ------------------------------               
+
+
+
+  Non-Reflecting BC                          
+  -----------------                            
+
+    General NRBC                             
+    ------------                                 
+
+
+
+    Turbo-specific NRBC                      
+    -------------------                          
+
+
+  Perforated Wall                            
+  ---------------                              
+
+
+    Model Setup                              
+    -----------                                  
+
+
+      Injection                              
+      ---------                                    
+
+        1                                    
+        -                                            
+
+          Injection Thread                    : #f
+
+
+
+
+
+
+          Dynamic Setup                      
+          -------------                                
+
+
+  Settings                                   
+  --------                                     
+
+
+    Pressure Outlet                          
+    ---------------                              
+
+
+
+
+    Pressure Far Field                       
+    ------------------                           
+
+
+
+    Target Mass Flow Rate Settings           
+    ------------------------------               
+
+
+
+    Advanced                                 
+    --------                                     
+
+
+

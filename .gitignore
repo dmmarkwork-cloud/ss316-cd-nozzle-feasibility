@@ -1,0 +1,24 @@
+# Jupyter
+.ipynb_checkpoints/
+*-checkpoint.ipynb
+
+# ANSYS solver/auto-save files
+*.lock
+*.trn
+*_files/dp0/
+*_files/user_files/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor settings
+.vscode/
+.idea/
+
+# Large binary files (GitHub rejects >100 MB)
+*.cas.h5
+*.dat.h5
+*.wbpz
+*.wbpj
