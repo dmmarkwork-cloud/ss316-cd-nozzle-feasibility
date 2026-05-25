@@ -20,14 +20,14 @@ The short answer is *yes against yield, no against creep*, and the engineering v
 ![Mach number contour from the converged Fluent solution](cfd/figures/mach_contour_v2.png)
 *Mach number contour, converged Fluent solution. Exit Mach 3.06 vs. area-Mach hand-calc value 2.94; within 4%, validation gate passed.*
 
-![Nozzle half-section dimensions](cad/cad_dimensionss.png)
+![Nozzle half-section dimensions](cad/cad_dimensions.png)
 *Nozzle half-section dimensions (mm). Throat radius 15, exit radius 30 (ε = 4), conical 30°/15° half-angles, 4 mm wall.*
 
 ![Workflow part 1](workbench/project_schematic_part1.png)
 ![Workflow part 2](workbench/project_schematic_part2.png)
 *Six-phase workflow with explicit validation gates between phases.*
 
-![Von Mises stress contour at Mesh 3](figures/von_mises_contour.png)
+![Von Mises stress contour at Mesh 3](fea/mesh3/von_mises_throat.png)
 *Throat von Mises stress = 4.92 MPa at Mesh 3 (mesh-converged), yielding FoS = 41 against SS316 yield at  530 °C. The red region at the inlet vertex is the constraint singularity, empirically confirmed as non-physical by mesh-refinement divergence in Phase 5, and excluded from the FoS calculation.*
 
 **The binding failure mode is not yield.** With wall temperature at ~530 °C — above the SS316 creep onset of ~410 °C (= 0.4·T_melt), sustained operation is creep-limited, not stress-limited. SS316 is viable for short-duration prototype/ground-test firings at this operating point. Sustained operation requires a creep analysis (Larson-Miller, ASME II-D) that is out of scope here.
