@@ -27,7 +27,7 @@ The short answer is *yes against yield, not against creep*, and the engineering 
 *Six-phase workflow with explicit validation gates between phases.*
 
 ![Von Mises stress contour at Mesh 3](fea/mesh3/von_mises_throat.png)
-*Throat von Mises stress = 4.92 MPa at Mesh 3 (mesh-converged), yielding FoS = 41 against SS316 yield at  530 °C. The red region at the inlet vertex is the constraint singularity, empirically confirmed as non-physical by mesh-refinement divergence in Phase 5, and excluded from the FoS calculation.*
+*Throat von Mises stress = 4.92 MPa at Mesh 3 (mesh-converged), yielding FoS = 42.7 against SS316 yield at  530 °C. The red region at the inlet vertex is the constraint singularity, empirically confirmed as non-physical by mesh-refinement divergence in Phase 5, and excluded from the FoS calculation.*
 
 **The binding failure mode is not yield.** With wall temperature at ~530 °C — above the SS316 creep onset of ~410 °C (= 0.4·T_melt), sustained operation is creep-limited, not stress-limited. SS316 is viable for short-duration prototype/ground-test firings at this operating point. Sustained operation requires a creep analysis (Larson-Miller, ASME II-D) that is out of scope here.
 
