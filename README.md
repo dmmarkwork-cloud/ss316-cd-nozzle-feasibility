@@ -71,12 +71,12 @@ Six phases, each gated by validation against the previous phase.
 
 | # | Phase | Status | Deliverable |
 |---|---|---|---|
-| 1 | Hand calculations (isentropic, area-Mach, T_aw) | ✓ Complete | `notebooks/cd-nozzle-handcalc-checkpoint` |
-| 2 | SolidWorks geometry (2D axisymmetric profile) | ✓ Complete | `cad/conical_v1_sketch` |
-| 3 | CFD — ANSYS Fluent, 2D axisymmetric, k-ω SST | ✓ Complete | `docs/Phase3_CFD_Summary` |
-| 4 | CFD/hand-calc validation gate | ✓ Passed | Documented in Phase 3 summary |
-| 5 | One-way FSI → ANSYS Mechanical thermal-structural | ✓ Complete | `docs/Phase4_FEA_Summary_v3.md` |
-| 6 | Mesh convergence study | ✓ Complete | `docs/Phase5_Convergence_Study_v2.md` |
+| 1 | Hand calculations (isentropic, area-Mach, T_aw) | Complete | `notebooks/cd-nozzle-handcalc-checkpoint` |
+| 2 | SolidWorks geometry (2D axisymmetric profile) | Complete | `cad/conical_v1_sketch` |
+| 3 | CFD — ANSYS Fluent, 2D axisymmetric, k-ω SST | Complete | `docs/Phase3_CFD_Summary` |
+| 4 | CFD/hand-calc validation gate | Passed | Documented in Phase 3 summary |
+| 5 | One-way FSI → ANSYS Mechanical thermal-structural | Complete | `docs/Phase4_FEA_Summary_v3.md` |
+| 6 | Mesh convergence study | Complete | `docs/Phase5_Convergence_Study_v2.md` |
 
 The one-way FSI uses Fluent wall outputs (static temperature, static pressure) mapped onto the FEA mesh through ANSYS Workbench **External Data systems**.
 
@@ -85,7 +85,7 @@ The one-way FSI uses Fluent wall outputs (static temperature, static pressure) m
 ## Key findings
 
 1. **Yield is not the binding failure mode.** FoS ≈ 42.7 against yield at the throat, mesh-converged. Time-dependent creep is the limiting mode for sustained operation.
-2. **The wall is essentially isothermal** through the thickness (Biot number = 0.0022). Uncooled SS316 in still air cannot dissipate heat fast enough to develop a meaningful through-wall gradient at steady state. The dominant stress contributor is pressure hoop, not thermal gradient.
+2. **The wall is essentially isothermal** through the thickness. Uncooled SS316 in still air cannot dissipate heat fast enough to develop a meaningful through-wall gradient at steady state. The dominant stress contributor is pressure hoop, not thermal gradient.
 3. **Mesh convergence is demonstrated** by a three-mesh trend study. The throat von Mises probe is stable to <1% between Mesh 2 and Mesh 3 (4.87 → 4.92 MPa). Global max von Mises diverges with refinement, empirically confirming the inlet-vertex constraint as a singularity rather than a physical hot spot.
 4. **Three independent boundary-condition errors** were caught and corrected during Phase 4 — most consequentially, a convection film coefficient that was 6 orders of magnitude too high due to a units mismatch in Mechanical's active unit system (W/mm²·K vs W/m²·K). The pre-solve verification gate added in response to these errors is documented in `docs/Phase4_FEA_Summary_v2.md`
 
