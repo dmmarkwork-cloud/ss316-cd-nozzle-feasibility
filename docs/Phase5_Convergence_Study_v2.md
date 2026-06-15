@@ -79,6 +79,8 @@ $$\sigma_y(530.44°C) = 238 + (195 - 238) \times \frac{530.44 - 400}{600 - 400} 
 
 $$\text{FoS} = \frac{\sigma_{y,throat}}{\sigma_{vM,throat,M3}} = \frac{209.95}{4.9171} = 42.70$$
 
+The yield strength used here is the typical annealed value (SSINA Table 1 / Nickel Institute brochure 9004); against spec-minimum values (roughly 50–70% of typical), the FoS would fall to approximately 21–30, which does not alter the conclusion that yield is not the binding constraint.
+
 (v1 FoS = 41.32.)
 
 ### 4.3 Mesh sensitivity of FoS

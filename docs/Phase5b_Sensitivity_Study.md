@@ -47,15 +47,15 @@ A check on through-wall element count was performed at the throat for each case.
 
 | QoI | Predicted (analytical) | Measured (FEA) | Match |
 |---|---|---|---|
-| ΔT_throat at t = 3 mm (Bi = 0.0017) | ~1.3 K | 1.33 K | within 3% |
-| ΔT_throat at t = 4 mm (Bi = 0.0022) | ~2.1 K | 2.10 K | exact |
-| ΔT_throat at t = 5 mm (Bi = 0.0028) | ~2.6 K | 2.71 K | within 4% |
+| ΔT_throat at t = 3 mm (conduction-predicted) | ~1.3 K | 1.33 K | within 3% |
+| ΔT_throat at t = 4 mm (conduction-predicted) | ~2.1 K | 2.10 K | exact |
+| ΔT_throat at t = 5 mm (conduction-predicted) | ~2.6 K | 2.71 K | within 4% |
 | δ_exit (α·ΔT·L, t-independent) | 1.70 mm | 1.7150–1.7159 mm | within 1% |
 | Pressure hoop alone (P*·r/t at t=3) | 5.29 MPa | n/a (see Section 5) | n/a |
 | Pressure hoop alone (P*·r/t at t=4) | 3.96 MPa | n/a | n/a |
 | Pressure hoop alone (P*·r/t at t=5) | 3.17 MPa | n/a | n/a |
 
-ΔT_throat tracks Biot number prediction across all three thicknesses. δ_exit is essentially t-independent (varies by < 0.1%), matching the analytical expectation that free axial expansion = α · ΔT · L is a property of the wall material and integrated temperature, not the wall thickness. Both results confirm the thermal solve and structural compliance are correctly resolved across the three cases.
+ΔT_throat tracks the conduction prediction across all three thicknesses — a thicker wall carries a slightly larger share of the (small) inner-to-ambient temperature drop, so ΔT rises modestly with thickness. δ_exit is essentially t-independent (varies by < 0.1%), matching the analytical expectation that free axial expansion = α · ΔT · L is a property of the wall material and integrated temperature, not the wall thickness. Both results confirm the thermal solve and structural compliance are correctly resolved across the three cases.
 
 ### 2.3 Factor of Safety against yield at throat
 
@@ -147,8 +147,8 @@ The FoS results in this document are upper-bound conservative for thin walls (t 
 ## 7. Future Work (Updated)
 
 1. **Bartz convection BC sensitivity study.** Re-run t = 3, 4, 5 mm with h_g(x) inner-wall convection BC instead of Dirichlet. Quantify the compression of the t-dependence and identify the actual dominant stress component as a function of t.
-2. **Creep analysis (Larson-Miller, ASME II-D).** Establish the binding limit at the t = 4 mm baseline, then sweep across t to identify creep-life-driven minimum thickness.
-3. **Two-way FSI iteration.** Allow structural deformation to feed back into the CFD flow field. Likely small effect at this Bi = 0.0022 regime, but worth documenting.
+2. **Creep analysis (Larson-Miller).** Establish the binding limit at the t = 4 mm baseline, then sweep across t to identify creep-life-driven minimum thickness, using creep-rupture data per ASME Boiler and Pressure Vessel Code, Section II, Part D (allowable stresses incorporating time-dependent behaviour above ~454 °C).
+3. **Two-way FSI iteration.** Allow structural deformation to feed back into the CFD flow field. Likely small effect given the low through-wall heat flux in this model, but worth documenting.
 
 ---
 

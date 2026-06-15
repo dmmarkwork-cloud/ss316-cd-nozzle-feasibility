@@ -2,8 +2,7 @@
 **Project:** SS316 Nozzle Feasibility · Pc=2MPa · Tc=800K · Rt=15mm · ε=4 · t=4mm
 **Date:** 2026-05-06 · **Updated:** 2026-05-07 (Phase 5 reconciliation) · **Solver:** ANSYS 2026 R1 Student · **Model:** 2D Axisymmetric
 
-**Note:** This document is superseded by `Phase5_FEA_v3.md` as a result of a data integrity correction. The v2 baseline FEA was solved against a stale CFD wall temperature export that did not propagate downstream after CFD re-run. v2 numbers in this document remain accurate as a record of what was solved at that time; v3 contains corrected and updated values for FoS. **Do not quote v2 numbers in the engineering report or external deliverables.**
-
+Supersedes Phase4_FEA_Summary.md. Three independent BC errors in v1 were identified and corrected — see Section 10. Mesh and result values updated post-Phase 5 for consistency with the convergence study baseline — see Section 13.
 
 ---
 
@@ -35,7 +34,7 @@
 | Wall thickness | 4 mm |
 | Throat radius (inner) | 15 mm |
 | Exit radius (inner) | ~30 mm |
-| Nozzle length | ~190 mm |
+| Nozzle length | 183.44 mm |
 | Orientation | Y = axial, X = radial (Mechanical axisymmetric convention) |
 | Analysis type | 2D — Axisymmetric |
 
@@ -183,21 +182,28 @@ Both checks computed analytically before solving and verified against FEA result
 
 | Check | Analytical | FEA | Deviation |
 |---|---|---|---|
-| Through-wall ΔT (Bi = h·t/k = 0.0022 ≪ 0.1, expect ~1–2 K) | ~1 K | 2.12 K | within range |
-| Free axial expansion (α·ΔT·L = 17.5×10⁻⁶ × 511 × 190 mm) | 1.70 mm | 1.7161 mm | 0.9% |
+| Through-wall ΔT (small because outer-wall film resistance dominates heat path; expect ~1–2 K) | ~1 K | 2.12 K | within range |
+| Free axial expansion (α·ΔT·L = 17.1×10⁻⁶ × 511 × 183.44 mm) | 1.60 mm | 1.7161 mm | 6.6% |
+
+Notes on the inputs:
+- **L = 183.44 mm** is the actual nozzle length (corrected from the earlier 190 mm placeholder).
+- **α = 17.1×10⁻⁶ /K** is the *mean* thermal expansion coefficient between the 20 °C reference and the ~531 °C wall temperature, not the value at any single temperature. This is the correct quantity for free expansion over a temperature rise, since the wall expands across the whole range it heats through. (For reference, the table value at 400 °C is 17.5 and at 531 °C is ~18.16; the mean over the range is lower because it includes the cooler near-reference behaviour.)
+- The ~6.6% deviation is expected for an order-of-magnitude gate — the analytical estimate assumes uniform free expansion of a straight bar, while the FEA includes the curved wall profile and the small differential expansion along the nozzle. The estimate lands at the right magnitude, which is its purpose.
 
 ### 8.5 Stress Decomposition — Throat (corrected physics)
 
-With wall near-isothermal (Bi = 0.0022):
+Dominant component resolved by separating the contributors at t = 4 mm and cross-checking against the Phase 5b wall-thickness sweep (see note below):
 
 | Component | Magnitude | Notes |
 |---|---|---|
-| Pressure hoop stress (Pc·r/t at throat) | ~7.5 MPa | Dominant |
-| Through-wall thermal gradient | ~quasi-zero | Wall is thermally lumped |
+| Through-wall thermal-bending (E·α·ΔT / [2(1−ν)], ΔT ≈ 2.1 K) | ~4.3–4.8 MPa | **Dominant** |
+| Pressure hoop stress (P*·r/t at throat) | ~3.96 MPa | Secondary |
 | Axial pressure end-cap | ~3.75 MPa | Minor |
-| Differential axial expansion (~40 K over 190 mm) | <5 MPa | Minor |
+| Differential axial expansion (~40 K over 183.44 mm) | <5 MPa | Minor |
 
-Pressure hoop is now the dominant stress contributor — chamber-wall band shows 21.2 MPa = Pc · 42.4 mm / 4 mm, consistent with Pc·r/t hoop calc.
+**Throat stress is thermal-bending-dominated, not pressure-hoop-dominated.** This is established by the Phase 5b thickness sweep: FEA throat σ_vM *rises* with wall thickness (3.94 → 4.92 → 6.18 MPa across t = 3/4/5 mm), the opposite of the pressure-hoop trend (P*·r/t = 5.29 → 3.96 → 3.17 MPa, ∝ 1/t). A rising trend can only come from the thermal-bending term, whose driver ΔT grows with t. The hand-calc agrees: thermal-bending ≈ 4.3 MPa exceeds pressure hoop 3.96 MPa at t = 4 mm, and the two combine to the FEA total von Mises of 4.92 MPa (Mesh 3) / 5.19 MPa (Mesh 1). The earlier "~7.5 MPa pressure-hoop, dominant" entry was wrong on both counts — 7.5 MPa exceeds the FEA total (impossible for a single component), and the correct hoop value is 3.96 MPa.
+
+For contrast, the *chamber* band (not the throat) is pressure-hoop-dominated: it shows ~21.2 MPa = P_c · 42.4 mm / 4 mm, consistent with the P·r/t hoop calc at the larger chamber radius and near-zero local ΔT. The dominant mechanism differs by location — hoop in the chamber, thermal-bending at the throat.
 
 ---
 
@@ -206,9 +212,9 @@ Pressure hoop is now the dominant stress contributor — chamber-wall band shows
 Under steady-state operation (Pc = 2 MPa, Tc = 800 K, uncooled, natural convection):
 
 1. **SS316 does not fail by yield.** Throat σ_vM ≈ 5 MPa vs σ_y(531°C) ≈ 210 MPa, FoS ≈ 40 at Mesh 1, **41.3 at converged Mesh 3** (see Section 13).
-2. **Wall is essentially isothermal at T_aw** (Bi = 0.0022). Uncooled SS316 in still air cannot dissipate heat fast enough to develop a meaningful through-wall gradient at steady state.
+2. **Wall is essentially isothermal at T_aw.** The outer wall is modelled with a low natural-convection coefficient (10 W/m²·K), so it sheds almost no heat; the through-wall heat flux is therefore tiny and only a small gradient (~2 K) develops. Uncooled SS316 in still air cannot dissipate heat fast enough to develop a meaningful through-wall gradient at steady state.
 3. **Active design constraint shifts from yield to creep.** Wall sits at ~800 K = 531 °C, above the SS316 creep threshold of ~410 °C (= 0.4·T_melt). Time-dependent creep, not yield, is the limiting failure mode for sustained operation.
-4. **Bulk axial thermal expansion** is 1.72 mm over 190 mm. Affects joint/mount/seal design but is not itself a structural failure.
+4. **Bulk axial thermal expansion** is 1.72 mm over 183.44 mm. Affects joint/mount/seal design but is not itself a structural failure.
 5. **Project framing answer:** Uncooled SS316 is **viable for short-duration prototype/ground-test firings** at this operating point on yield grounds. For sustained operation, creep analysis (Larson-Miller, ASME II-D allowable stresses) is required and recommended as future work. Aligns with IJIRSET 2019 SS316 thruster precedent (prototype) and ArianeGroup's use of Haynes 25 for flight-qualified hardware (where creep + cycle life dominate).
 6. **Mesh independence demonstrated in Phase 5.** The FoS conclusion is not mesh-dependent — see Section 13.
 
@@ -251,7 +257,7 @@ Three independent BC errors corrected, plus supporting fixes. Each row: symptom 
 |---|---|---|
 | Inlet vertex constraint singularity | Global max σ_vM (267 MPa at Mesh 1, diverges with refinement) is non-physical | Use throat probe (5.19 MPa); Phase 5 confirmed divergence empirically — see Section 13 |
 | Outer wall h = 10 W/m²·K | Conservative — assumes still air | Real test stand may have additional convection from exhaust plume |
-| Adiabatic wall CFD → T_aw | Neglects wall conduction in CFD | Bi = 0.0022 confirms wall conduction would not change gas-side T_aw — standard one-way FSI is appropriate |
+| Adiabatic wall CFD → T_aw | Neglects wall conduction in CFD | The outer wall is near-adiabatic (h = 10 W/m²·K), so through-wall heat flux is small and gas-side T_aw is not significantly affected by neglecting conjugate heat transfer — standard one-way FSI is appropriate. (Note: a gas-side Biot number using the Bartz coefficient is ≈ 0.6, not negligible; the justification rests on the low outer-wall heat flux, not on a lumped wall.) |
 | Negative pressure at exit edge (−0.039 MPa) | Negligible — 2% of peak pressure | Numerical BC artefact, not bulk flow error |
 | 2D axisymmetric — no 3D effects | Ignores asymmetric loads | Valid for axisymmetric geometry; license-driven decision |
 | **No creep model** | Wall above SS316 creep threshold (~410 °C) | **Active scope boundary.** FoS = 40 against yield is not the binding limit. Creep flagged as required future work |
@@ -259,55 +265,12 @@ Three independent BC errors corrected, plus supporting fixes. Each row: symptom 
 
 ---
 
-## 12. Phase 5 — Mesh Convergence Plan (superseded)
+## 12. File Trail
 
-Phase 5 is **complete**. The original plan in this section has been superseded by the executed study documented in `Phase5_Convergence_Study.md`. Section 13 below summarises the outcome.
-
-### 12.1 Mandatory Pre-Solve BC Verification Gate (retained)
-
-Added in response to v1 BC failures. Applied before each Phase 5 solve:
-
-1. Imported Loads spatially spot-checked (chamber red, exit blue on pressure; throat hot, exit cold on temperature)
-2. Convection BC value AND units re-confirmed in details panel
-3. Reference temperatures consistent across Engineering Data / body / environment (all 20 °C)
-4. Order-of-magnitude analytical estimates computed:
-   - Biot number → expected through-wall ΔT
-   - α·ΔT·L → expected free thermal expansion
-   - Pc·r/t → expected hoop stress
-5. Post-solve: results compared against pre-solve estimates. Any deviation > 2× triggers root-cause investigation before proceeding.
-
----
-
-## 13. Phase 5 Convergence Study — Outcome Summary
-
-Full details in `Phase5_Convergence_Study.md`. Reproduced here for cross-reference.
-
-### 13.1 Three-mesh study
-
-| Metric | Mesh 1 | Mesh 2 | Mesh 3 |
-|---|---|---|---|
-| Combined nodes + elements | 10,685 | 16,527 | 21,565 |
-| Min element quality | 0.674 | 0.619 | 0.632 |
-| Linear refinement ratio | — | 1.24 | 1.14 |
-
-All three meshes used identical method (Quadrilateral Dominant), identical global sizing (Medium), and identical BCs. Only local element sizing varied between meshes.
-
-### 13.2 QoI convergence results
-
-| QoI | Mesh 1 | Mesh 2 | Mesh 3 | M1→M2 | M2→M3 | Verdict |
-|---|---|---|---|---|---|---|
-| σ_vM,throat (MPa) | 5.1924 | 5.0321 | 5.0773 | −3.09% | +0.89% | ✓ Converged |
-| T_throat (K) | 804.38 | 804.38 | 804.38 | 0% | 0% | ✓ Converged |
-| ΔT_throat (K) | 2.12 | 2.11 | 2.10 | −0.47% | −0.47% | ✓ Converged |
-| δ_exit (mm) | 1.7161 | 1.7161 | 1.7163 | 0% | +0.012% | ✓ Converged |
-| σ_vM,global (MPa) | 267.06 | 352.61 | 430.57 | +32.03% | +22.11% | ✓ Diverges (singularity confirmed) |
-
-### 13.3 Mesh-converged FoS
-
-At Mesh 3:
-
-$$\text{FoS}_{converged} = \frac{\sigma_{y,531°C}}{\sigma_{vM,throat,M3}} = \frac{209.78}{5.0773} = 41.3$$
-
-Within 2% of the Mesh 1 baseline (40.4), confirming mesh independence. The σ_vM,global divergence empirically validates excluding the constraint singularity from the FoS calculation.
-
----
+| File | Purpose |
+|---|---|
+| Phase4_FEA_Summary.md | Original v1 — broken solve (3 BC errors) |
+| Phase4_FEA_Summary_v2.md | This document — corrected v2 baseline + Phase 5 reconciliation |
+| Phase5_Convergence_Study.md | Standalone Phase 5 deliverable |
+| phase5_convergence.ipynb | Jupyter handcalcs notebook with calculations and plots |
+| phase5_convergence.pdf | Exported notebook PDF for portfolio submission |
