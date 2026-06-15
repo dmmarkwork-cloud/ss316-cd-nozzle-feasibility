@@ -5,6 +5,8 @@ Multiphysics analysis of an uncooled stainless-steel converging-diverging nozzle
 
 The short answer is *yes against yield, not against creep.*
 
+[Download Full Report (PDF)](https://github.com/dmmarkwork-cloud/ss316-cd-nozzle-feasibility/blob/main/report/ss316_cd_nozzle_report.pdf)
+
 ---
 
 ## Headline result
@@ -155,6 +157,6 @@ C-D-Nozzle/
 
 ---
 
-## Author
 
+## Author
 Mark Lorenz Yamanaka · Tsukuba · 2026
