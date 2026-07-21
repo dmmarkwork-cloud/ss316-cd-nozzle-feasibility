@@ -25,10 +25,10 @@ V2 final converged solution. Re-run from Geom-1 mesh after V1 case/data loss. Al
 | Domain extents (x, axial) | −126.72 mm to 56.72 mm |
 | Domain extents (y, radial) | 0 to 42.40 mm |
 | Total 2D area | 6.810 × 10⁻⁴ m² |
-| Throat location (axial) | x ≈ −47 mm (Fluent coordinate system) |
-| Geometry type | Conical C-D, converging half-angle 30°, diverging half-angle 15° |
-| Throat radius (inner) | 15 mm |
-| Exit radius (inner) | 30 mm (from area ratio ε=4) |
+| Throat location (axial) | x = 0 mm (throat plane, Fluent coordinate system) — the earlier "x ≈ −47 mm" entry was an error; the domain runs −126.72 to +56.72 with the throat at the origin (see Geometry Freeze Disposition) |
+| Geometry type | Conical C-D. Converging straight taper **47.43°** half-angle; diverging straight taper **14.91°** half-angle (as-built, verified from CAD/STEP against the CFD mesh wall). The earlier "30° / 15°" entry was documentation error carried from a draft — see `docs/Geometry_Freeze_Disposition.md` |
+| Throat radius (inner) | 15.00 mm nominal design value. As-built minimum radius is 14.942 mm at x ≈ −1.6 mm (−0.77 % throat area), dispositioned use-as-is — see Geometry Freeze Disposition |
+| Exit radius (inner) | 30 mm (from area ratio ε = 4) |
 
 ---
 

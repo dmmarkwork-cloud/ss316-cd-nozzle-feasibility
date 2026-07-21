@@ -23,7 +23,7 @@ The short answer is *yes against yield, not against creep.*
 *Mach number contour, converged Fluent solution. Area-weighted exit Mach 2.87 vs hand-calc 2.94, within 2.5% (validation gate passed).*
 
 ![Nozzle half-section dimensions](cad/cad_dimensions.png)
-*Nozzle half-section dimensions (mm). Throat radius 15, exit radius 30 (ε = 4); 14.8° conical divergent half-angle. The convergent side is not a simple cone; it is a straight taper from the chamber blends into the throat through an R22.5 arc, so it has no single half-angle. 4 mm wall.*
+*Nozzle half-section dimensions (mm). Throat radius 15 (nominal; as-built minimum 14.942 at −0.77 % area — see Geometry Freeze Disposition), exit radius 30 (ε = 4). Divergent side: 14.8° throat-to-exit chord angle (the straight diverging segment itself is 14.91°). Convergent side: a straight 47.43° taper from the chamber blended into the throat through an R22.5 arc. 4 mm wall.*
 
 ![Workflow part 1](workbench/project_schematic_part1.png)
 ![Workflow part 2](workbench/project_schematic_part2.png)
@@ -47,7 +47,7 @@ The short answer is *yes against yield, not against creep.*
 | Area ratio, A_e/A_t | 4 | |
 | Contraction ratio, A_c/A_t | 8 | From M_inlet ≤ 0.1 constraint (min ≥ 5.9) |
 | Wall thickness, t | 4 mm | Baseline; sensitivity at 3/4/5 mm |
-| Geometry | Conical C-D | 14.8° divergent half-angle; convergent side is a straight taper blended into the throat by an R22.5 arc |
+| Geometry | Conical C-D | Diverging straight taper 14.91° half-angle (14.8° throat-to-exit chord); converging straight taper 47.43° half-angle, blended into the throat by an R22.5 arc. As-built, verified from CAD/STEP — see `docs/Geometry_Freeze_Disposition.md` |
 | Material | SS316 | Uncooled, temperature-dependent properties |
 
 Material precedent: the IJIRSET 2019 H₂O₂ monopropellant thruster (Deif et al.) uses SS316 in a similar uncooled configuration. Conditions differ (lower chamber pressure, smaller throat, pulsed, different working fluid), so it supports material precedent only.
@@ -114,6 +114,7 @@ C-D-Nozzle/
 ├── README.md                          # This file
 ├── docs/
 │   ├── ss316_properties.md
+│   ├── Geometry_Freeze_Disposition.md                  # Frozen as-built contour + deviation disposition
 │   ├── Phase3_CFD_Summary.md
 │   ├── Phase4_FEA_Summary_v2.md
 │   ├── Phase4_FEA_Summary_v3.md
