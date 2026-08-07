@@ -1,4 +1,4 @@
-# Phase 4 FEA — Setup, Conditions & Results Summary (v3 — Data Integrity Correction)
+# Phase 4 FEA: Setup, Conditions and Results Summary (v3, Data Integrity Correction)
 **Project:** SS316 Nozzle Feasibility · Pc=2MPa · Tc=800K · Rt=15mm · ε=4 · t=4mm
 **Date:** 2026-05-10 · **Solver:** ANSYS 2026 R1 Student · **Model:** 2D Axisymmetric
 
@@ -7,11 +7,11 @@ Supersedes `Phase4_FEA_Summary_v2.md`. The v2 baseline FEA was solved against a 
 
 ---
 
-## 1. Trigger — How the Stale Data Was Caught
+## 1. Trigger: How the Stale Data Was Caught
 
-During the Phase 5b sensitivity study setup at t = 3 mm, the Imported Temperature in Mechanical showed a Min source value of **790.29 K** instead of the v2 baseline-recorded 768.58 K. Cross-checking the Fluent CSV directly revealed only one node — at the exit edge (X = +56.72 mm) — differed between the two source files (805.72 K vs 767.85 K). The remaining 526 of 528 nodes were byte-identical.
+During the Phase 5b sensitivity study setup at t = 3 mm, the Imported Temperature in Mechanical showed a Min source value of **790.29 K** instead of the v2 baseline-recorded 768.58 K. Cross-checking the Fluent CSV directly revealed that only one node, at the exit edge (X = +56.72 mm), differed between the two source files (805.72 K vs 767.85 K). The remaining 526 of 528 nodes were byte-identical.
 
-The 38 K difference at the single edge node was sufficient to shift the mapped temperature field across the FEA mesh enough to change the throat probe stress by ~3%. The bulk wall temperature mean shift was 0.80 K with 1.84 K standard deviation across all nodes — small in absolute terms, but systematic and traceable to a defined upstream data event.
+The 38 K difference at the single edge node was sufficient to shift the mapped temperature field across the FEA mesh enough to change the throat probe stress by ~3%. The bulk wall temperature mean shift was 0.80 K with 1.84 K standard deviation across all nodes. That is small in absolute terms, but systematic and traceable to a defined upstream data event.
 
 ---
 
@@ -28,7 +28,7 @@ The 38 K difference at the single edge node was sufficient to shift the mapped t
 
 ---
 
-## 3. Architectural Lesson — Pre-Solve Gate Update
+## 3. Architectural Lesson: Pre-Solve Gate Update
 
 The Phase 4 v2 pre-solve verification gate (Section 12.2 of the v2 document) checked imported load *spatial distribution* (chamber red, exit blue) but not *upstream freshness*. A spatially correct import can still be reading a stale file. The gate is updated for v3 with a freshness check.
 
@@ -107,7 +107,7 @@ $$\text{FoS}_{v3} = \frac{\sigma_{y,throat}}{\sigma_{vM,throat,M3}} = \frac{209.
 |---|---|---|
 | FoS at converged Mesh 3 | 41.3 | **42.7** |
 
-Direction: marginally safer (+3.4%). Engineering interpretation unchanged — yield is not the binding constraint, creep is.
+Direction: marginally safer (+3.4%). Engineering interpretation unchanged: yield is not the binding constraint, creep is.
 
 ---
 
@@ -115,7 +115,7 @@ Direction: marginally safer (+3.4%). Engineering interpretation unchanged — yi
 
 Unchanged from v2. Uncooled SS316 is not yield-limited at this operating point. The wall sits at 530 °C, above the SS316 creep threshold of approximately 410 °C. Time-dependent creep analysis is required to establish the binding limit. SS316 is viable for short-duration prototype or ground-test firings on yield grounds.
 
-The data integrity correction shifted FoS by +3% — engineering conclusion not sensitive to the correction at this margin. This is itself a useful finding: it confirms that for FoS values of order 40+, ~1 K wall temperature noise in the imported load is well below the threshold of engineering significance. For lower FoS regimes (e.g., the t = 5 mm case in Phase 5b at FoS = 33.9), the same noise would be a larger relative contributor to uncertainty.
+The data integrity correction shifted FoS by +3%; the engineering conclusion is not sensitive to the correction at this margin. This is itself a useful finding: it confirms that for FoS values of order 40+, ~1 K wall temperature noise in the imported load is well below the threshold of engineering significance. For lower FoS regimes (e.g., the t = 5 mm case in Phase 5b at FoS = 33.9), the same noise would be a larger relative contributor to uncertainty.
 
 ---
 
@@ -126,7 +126,7 @@ Adds L11 to the v2 limitations:
 | # | Limitation | Impact | Mitigation |
 |---|---|---|---|
 | L1–L10 | Per Phase 4 v2 Section 11 | unchanged | unchanged |
-| L11 | Imported Load freshness — single-node CFD export variability between re-runs | ~3% on throat stress, ~3% on FoS | A3 architecture: Min/Max baseline values now recorded and checked pre-solve |
+| L11 | Imported Load freshness: single-node CFD export variability between re-runs | ~3% on throat stress, ~3% on FoS | A3 architecture: Min/Max baseline values now recorded and checked pre-solve |
 
 ---
 
@@ -134,9 +134,9 @@ Adds L11 to the v2 limitations:
 
 | File | Purpose |
 |---|---|
-| `Phase4_FEA_Summary.md` | Original v1 — broken solve (3 BC errors) |
-| `Phase4_FEA_Summary_v2.md` | v2 baseline — corrected BCs, stale upstream data |
-| `Phase4_FEA_Summary_v3.md` | **This document — data integrity correction + freshness gate** |
+| `Phase4_FEA_Summary.md` | Original v1; broken solve (3 BC errors) |
+| `Phase4_FEA_Summary_v2.md` | v2 baseline; corrected BCs, stale upstream data |
+| `Phase4_FEA_Summary_v3.md` | **This document; data integrity correction + freshness gate** |
 | `Phase5_Convergence_Study.md` | Original Phase 5 (against v2 stale data) |
 | `Phase5_Convergence_Study_v2.md` | Phase 5 re-run with corrected loads |
 | `Phase5b_Sensitivity_Study.md` | Wall thickness sensitivity (t = 3, 4, 5 mm) using corrected loads |
@@ -150,4 +150,4 @@ The v1 → v2 → v3 progression of this document is the deliverable, not the fi
 - v1 → v2: BC unit and mapping errors (caught by Biot number sanity check)
 - v2 → v3: Stale upstream data despite correct BC setup (caught by sensitivity study cross-check)
 
-The pre-solve verification gate has been extended at each step. A4-class failures — whatever they will turn out to be — will likely require A3 to be extended further. This is the expected pattern for a project of this complexity and is documented as such rather than papered over.
+The pre-solve verification gate has been extended at each step. A4-class failures, whatever they turn out to be, will likely require A3 to be extended further. This is the expected pattern for a project of this complexity and is documented as such rather than papered over.

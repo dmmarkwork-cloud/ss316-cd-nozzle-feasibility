@@ -2,7 +2,7 @@
 **Project:** SS316 Nozzle Feasibility · Pc=2MPa · Tc=800K · Rt=15mm · ε=4 · t=4mm
 **Date:** 2026-05-07 · **Solver:** ANSYS 2026 R1 Student · **Model:** 2D Axisymmetric
 
-**Note:** This document is superseded by `Phase5_Convergence_Study_v2`. The convergence study methodoloy, mesh design, and probe strategy are correct and re-used in v2. The QoI values and FoS calculation were computed agains the stale upstream CFD temperature data; the corrected values are in v2. `Use v2 numbers in the engineering report`.
+**Note:** This document is superseded by `Phase5_Convergence_Study_v2`. The convergence study methodology, mesh design, and probe strategy are correct and re-used in v2. The QoI values and FoS calculation were computed against the stale upstream CFD temperature data; the corrected values are in v2. `Use v2 numbers in the engineering report`.
 
 ---
 
@@ -28,7 +28,7 @@ The only variable changing between meshes is element size, applied through local
 
 ### 1.3 Probe strategy
 
-All QoI sampled at **vertex-scoped named selections**, not node IDs. Vertex scoping ensures the same physical location is sampled across all three meshes; node IDs would shift between mesh generations and invalidate the comparison. Through-wall ΔT uses a Construction Geometry Path between two coplanar points (same Y, X separated by wall thickness), not two separate point probes — the inner and outer wall vertices are not at the same axial position due to the parallel wall offset, so direct point-probe subtraction would be sampling different axial stations.
+All QoI sampled at **vertex-scoped named selections**, not node IDs. Vertex scoping ensures the same physical location is sampled across all three meshes; node IDs would shift between mesh generations and invalidate the comparison. Through-wall ΔT uses a Construction Geometry Path between two coplanar points (same Y, X separated by wall thickness), not two separate point probes. The inner and outer wall vertices are not at the same axial position because of the parallel wall offset, so direct point-probe subtraction would sample different axial stations.
 
 ---
 
@@ -57,7 +57,7 @@ $$r_{23} = \sqrt{\frac{21565}{16527}} = 1.14$$
 
 ### 2.2 Quality stability across the study
 
-Min element quality stays in the 0.62–0.67 band across all three meshes, with average quality essentially flat at 0.92–0.93. Stable mesh quality across refinement levels means any change in QoI is attributable to element size, not to the mesher producing degraded elements at finer sizings — a necessary precondition for a valid convergence study.
+Min element quality stays in the 0.62–0.67 band across all three meshes, with average quality essentially flat at 0.92–0.93. Stable mesh quality across refinement levels means any change in QoI is attributable to element size, not to the mesher producing degraded elements at finer sizings. This is a necessary precondition for a valid convergence study.
 
 ---
 
@@ -65,11 +65,11 @@ Min element quality stays in the 0.62–0.67 band across all three meshes, with 
 
 | # | Quantity | Symbol | Probe location | Expected behaviour |
 |---|---|---|---|---|
-| 1 | Throat inner wall σ_vM | σ_vM,throat | `probe_throat_inner` vertex | Asymptotic — primary metric |
-| 2 | Throat inner wall T | T_throat | `probe_throat_inner` vertex | Asymptotic — validates thermal field |
-| 3 | Through-wall ΔT at throat | ΔT_throat | `path_throat_throughwall` (T at 0 mm − T at ≈ 4 mm) | Asymptotic — drives gradient stress |
-| 4 | Max total deformation at exit | δ_exit | `probe_exit_corner` vertex | Asymptotic — global compliance |
-| 5 | Global max σ_vM | σ_vM,global | Whole-model maximum | **Diverges** — singularity confirmation |
+| 1 | Throat inner wall σ_vM | σ_vM,throat | `probe_throat_inner` vertex | Asymptotic; primary metric |
+| 2 | Throat inner wall T | T_throat | `probe_throat_inner` vertex | Asymptotic; validates thermal field |
+| 3 | Through-wall ΔT at throat | ΔT_throat | `path_throat_throughwall` (T at 0 mm − T at ≈ 4 mm) | Asymptotic; drives gradient stress |
+| 4 | Max total deformation at exit | δ_exit | `probe_exit_corner` vertex | Asymptotic; global compliance |
+| 5 | Global max σ_vM | σ_vM,global | Whole-model maximum | **Diverges**; singularity confirmation |
 
 ---
 
@@ -101,9 +101,9 @@ $$\text{pc}_{12} = \frac{X_{M2} - X_{M1}}{X_{M1}} \times 100 \quad ; \quad \text
 
 ### 4.3 Interpretation
 
-Four QoIs show clean convergence. σ_vM,throat oscillates within a ±0.16 MPa band around ~5.07 MPa — this is mesh discretisation noise, not a trend, and the magnitude is engineering-irrelevant given the FoS margin established in Section 5. T_throat is identical to two decimal places across all three meshes, confirming the thermal field is fully resolved at coarse-mesh resolution. ΔT_throat decreases monotonically by 0.01 K per refinement step, converging toward the analytical estimate of ~1–2 K from Bi = 0.0022. δ_exit shows mesh-independent free thermal expansion at 1.716 mm, matching the analytical α·ΔT·L estimate to within 1%.
+Four QoIs show clean convergence. σ_vM,throat oscillates within a ±0.16 MPa band around ~5.07 MPa. This is mesh discretisation noise, not a trend, and the magnitude is engineering-irrelevant given the FoS margin established in Section 5. T_throat is identical to two decimal places across all three meshes, confirming the thermal field is fully resolved at coarse-mesh resolution. ΔT_throat decreases monotonically by 0.01 K per refinement step, converging toward the analytical estimate of ~1–2 K from Bi = 0.0022. δ_exit shows mesh-independent free thermal expansion at 1.716 mm, matching the analytical α·ΔT·L estimate to within 1%.
 
-The fifth QoI, σ_vM,global, climbs from 267 → 353 → 431 MPa across the three meshes — a +32% then +22% jump. This is the expected behaviour of a constraint singularity at the inlet vertex where the Y=0 displacement BC is applied. Each refinement level resolves more of the singular field, driving the local stress higher without converging. The divergence is the positive control for the study: it confirms the mesher is correctly resolving stress gradients (otherwise the singularity wouldn't appear at all), and empirically justifies excluding the global max from the FoS calculation in favour of the throat probe.
+The fifth QoI, σ_vM,global, climbs from 267 → 353 → 431 MPa across the three meshes, a +32% then +22% jump. This is the expected behaviour of a constraint singularity at the inlet vertex where the Y=0 displacement BC is applied. Each refinement level resolves more of the singular field, driving the local stress higher without converging. The divergence is the positive control for the study: it confirms the mesher is correctly resolving stress gradients (otherwise the singularity wouldn't appear at all), and empirically justifies excluding the global max from the FoS calculation in favour of the throat probe.
 
 ---
 
@@ -115,7 +115,7 @@ SS316 yield strength data (SSINA Table 1 / Nickel Institute brochure 9004):
 
 $$\sigma_y(400°C) = 238 \text{ MPa} \quad ; \quad \sigma_y(600°C) = 195 \text{ MPa}$$
 
-Throat temperature in converting from Kelving to Celsius:
+Throat temperature converted from Kelvin to Celsius:
 
 $$T_{throat,C} = T_{throat,M3} - 273.15 = 804.38 - 273.15 = 531.23 \text{ °C}$$
 
@@ -153,7 +153,7 @@ This conclusion is consistent with the IJIRSET 2019 SS316 thruster precedent (pr
 |---|---|
 | Linear refinement ratios (1.24, 1.14) below typical GCI threshold (1.3) | Prevents formal Richardson extrapolation; trend study only |
 | Three meshes is the minimum for asymptotic trend confirmation | More meshes would tighten uncertainty bounds but are constrained by the 32k license cap on the upper end |
-| σ_vM,global divergence is not formally extrapolated to mesh-converged limit | Acceptable — global max is a singularity, not a quantity of engineering interest |
+| σ_vM,global divergence is not formally extrapolated to mesh-converged limit | Acceptable; global max is a singularity, not a quantity of engineering interest |
 | Constraint singularity at inlet vertex is geometric, not physical | Real mounting hardware (flange, weld, clamp) would distribute the load across a finite area and produce a finite, lower stress |
 | No creep model | Wall above SS316 creep threshold; FoS of 41 against yield is not the binding limit for sustained operation |
 
@@ -161,6 +161,6 @@ This conclusion is consistent with the IJIRSET 2019 SS316 thruster precedent (pr
 
 ## 8. Files Generated
 
-- `phase5_convergence.ipynb` — Jupyter handcalcs notebook with all calculations and plots
-- `phase5_convergence.pdf` — exported PDF (File → Save and Export Notebook As → PDF_NoInput)
+- `phase5_convergence.ipynb`: Jupyter handcalcs notebook with all calculations and plots
+- `phase5_convergence.pdf`: exported PDF (File → Save and Export Notebook As → PDF_NoInput)
 - Three plots: σ_throat dual-panel (mesh independence + distance from yield), ΔT_throat convergence, σ_global divergence (log scale)

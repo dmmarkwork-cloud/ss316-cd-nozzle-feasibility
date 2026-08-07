@@ -1,4 +1,4 @@
-# Phase 5 Convergence Study (v2 — Corrected Upstream Loads)
+# Phase 5 Convergence Study (v2, Corrected Upstream Loads)
 **Project:** SS316 Nozzle Feasibility · Pc=2MPa · Tc=800K · Rt=15mm · ε=4 · t=4mm
 **Date:** 2026-05-10 · **Solver:** ANSYS 2026 R1 Student · **Model:** 2D Axisymmetric
 
@@ -119,11 +119,11 @@ The 3% downward shift in σ_vM,throat from v1 is an artefact of correcting the s
 |---|---|
 | Linear refinement ratios (1.24, 1.14) below typical GCI threshold (1.3) | Prevents formal Richardson extrapolation; trend study only |
 | Three meshes is the minimum for asymptotic trend confirmation | Constrained by 32k license cap on the upper end |
-| σ_vM,global divergence is not formally extrapolated | Acceptable — global max is a singularity, not engineering-relevant |
+| σ_vM,global divergence is not formally extrapolated | Acceptable; global max is a singularity, not engineering-relevant |
 | Constraint singularity at inlet vertex | Real mounting hardware would distribute load and produce a finite, lower stress |
 | No creep model | Wall above SS316 creep threshold; FoS of 42 against yield is not the binding limit |
 
-Phase 4 v3 limitation L11 (Imported Load freshness — single-node CFD export variability) added at the project level but does not change the within-study convergence conclusion of this document.
+Phase 4 v3 limitation L11 (Imported Load freshness: single-node CFD export variability) is added at the project level but does not change the within-study convergence conclusion of this document.
 
 ---
 
@@ -131,8 +131,8 @@ Phase 4 v3 limitation L11 (Imported Load freshness — single-node CFD export va
 
 | File | Purpose |
 |---|---|
-| `Phase5_Convergence_Study.md` | Original v1 — solved against stale upstream temperature |
-| `Phase5_Convergence_Study_v2.md` | **This document — re-run with corrected loads** |
+| `Phase5_Convergence_Study.md` | Original v1; solved against stale upstream temperature |
+| `Phase5_Convergence_Study_v2.md` | **This document; re-run with corrected loads** |
 | `phase5_convergence.ipynb` | Jupyter handcalcs notebook (FoS interpolation values updated to v2) |
 | `phase5_convergence.pdf` | Exported PDF (regenerate with v2 numbers before report submission) |
 
@@ -140,6 +140,6 @@ Phase 4 v3 limitation L11 (Imported Load freshness — single-node CFD export va
 
 ## 8. Closing Note
 
-The convergence study itself was correctly designed and executed in v1. The error was not in the methodology, the mesh design, the probe strategy, or the convergence interpretation — all of those carry through unchanged. The error was in trusting that the upstream External Data link was current. v2 documents what changes when that assumption is verified rather than assumed.
+The convergence study itself was correctly designed and executed in v1. The error was not in the methodology, the mesh design, the probe strategy, or the convergence interpretation; all of those carry through unchanged. The error was in trusting that the upstream External Data link was current. v2 documents what changes when that assumption is verified rather than assumed.
 
 This is consistent with the v1 → v2 progression of Phase 4 (where the BC setup was correct in form but wrong in unit/sign). The pattern across both phases: methodology has been consistently sound; setup hygiene has been the recurring failure mode. The v3 pre-solve gate (Phase 4 v3 Section 3) addresses this systemically going forward.

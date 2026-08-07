@@ -1,10 +1,10 @@
-# Phase 5b Sensitivity Study — Wall Thickness
+# Phase 5b Sensitivity Study: Wall Thickness
 **Project:** SS316 Nozzle Feasibility · Pc=2MPa · Tc=800K · Rt=15mm · ε=4
 **Date:** 2026-05-10 · **Solver:** ANSYS 2026 R1 Student · **Model:** 2D Axisymmetric
 
 Wall thickness sensitivity study at converged Mesh 3 refinement, varying **t ∈ {3, 4, 5} mm**; promoted to executed Phase 5b after the data integrity correction (Phase 4 v3) cleared the upstream baseline.
 
-This study produced a **non-monotonic finding** that is physically explicable but BC-dependent. Section 5 contains the most important caveat in this document — it must be read before quoting the FoS values out of context.
+This study produced a **non-monotonic finding** that is physically explicable but BC-dependent. Section 5 contains the most important caveat in this document; read it before quoting the FoS values out of context.
 
 ---
 
@@ -23,7 +23,7 @@ This study produced a **non-monotonic finding** that is physically explicable bu
 
 ### 1.2 Variable changed
 
-Wall thickness: t ∈ {3, 4, 5} mm. Inner wall geometry identical across all three cases (the gas-side surface — Rt = 15 mm at throat, Re = 30 mm at exit do not change). Only the outer wall offset differs.
+Wall thickness: t ∈ {3, 4, 5} mm. Inner wall geometry identical across all three cases (the gas-side surface, with Rt = 15 mm at throat and Re = 30 mm at exit, does not change). Only the outer wall offset differs.
 
 ### 1.3 Through-wall mesh density
 
@@ -55,7 +55,7 @@ A check on through-wall element count was performed at the throat for each case.
 | Pressure hoop alone (P*·r/t at t=4) | 3.96 MPa | n/a | n/a |
 | Pressure hoop alone (P*·r/t at t=5) | 3.17 MPa | n/a | n/a |
 
-ΔT_throat tracks the conduction prediction across all three thicknesses — a thicker wall carries a slightly larger share of the (small) inner-to-ambient temperature drop, so ΔT rises modestly with thickness. δ_exit is essentially t-independent (varies by < 0.1%), matching the analytical expectation that free axial expansion = α · ΔT · L is a property of the wall material and integrated temperature, not the wall thickness. Both results confirm the thermal solve and structural compliance are correctly resolved across the three cases.
+ΔT_throat tracks the conduction prediction across all three thicknesses: a thicker wall carries a slightly larger share of the (small) inner-to-ambient temperature drop, so ΔT rises modestly with thickness. δ_exit is essentially t-independent (varies by < 0.1%), matching the analytical expectation that free axial expansion = α · ΔT · L is a property of the wall material and integrated temperature, not the wall thickness. Both results confirm the thermal solve and structural compliance are correctly resolved across the three cases.
 
 ### 2.3 Factor of Safety against yield at throat
 
@@ -81,14 +81,14 @@ The Dirichlet BC imposes T_aw(x) on the inner wall regardless of wall thickness.
 
 1. The same imposed inner-wall temperature combined with a longer through-wall path produces a larger through-wall ΔT (confirmed: 1.33 → 2.10 → 2.71 K).
 2. The differential expansion between inner and outer surfaces drives a bending moment at the throat region, where geometric curvature constrains free expansion.
-3. Bending stiffness of a plate scales as t³, but the surface stress associated with a given imposed differential expansion scales as t · E · α · ΔT / (1 − ν) — and ΔT itself grows with t (per Bi).
+3. Bending stiffness of a plate scales as t³, but the surface stress associated with a given imposed differential expansion scales as t · E · α · ΔT / (1 − ν), and ΔT itself grows with t (per Bi).
 4. Net effect: thicker wall = higher inner-surface bending stress at the throat, in this BC + geometry configuration.
 
 Pressure hoop component (∝ 1/t) is smaller than the thermal-bending component at all three thicknesses. The pressure component decreases with t, but the thermal-bending component increases faster, so the von Mises sum increases with t.
 
 ### 3.2 Why this is reportable, not anomalous
 
-The trend was initially counter-intuitive against a naive pressure-vessel reading. A careful decomposition of the stress state — separating pressure hoop from thermal bending — recovers physical sense. The mechanism is consistent with bending-plate theory for a constrained thermally-loaded shell. The four other QoIs (ΔT, δ_exit, T_throat, σ_global,singularity) all behave as analytically expected, providing positive controls that the FEA setup is correct and the trend reversal is not a numerical artefact.
+The trend was initially counter-intuitive against a naive pressure-vessel reading. A careful decomposition of the stress state, separating pressure hoop from thermal bending, recovers physical sense. The mechanism is consistent with bending-plate theory for a constrained thermally-loaded shell. The four other QoIs (ΔT, δ_exit, T_throat, σ_global,singularity) all behave as analytically expected, providing positive controls that the FEA setup is correct and the trend reversal is not a numerical artefact.
 
 ---
 
@@ -100,21 +100,21 @@ The trend was initially counter-intuitive against a naive pressure-vessel readin
 | 4 mm | 430.58 |
 | 5 mm | 484.70 |
 
-The singularity is constraint-driven (inlet vertex Y = 0 BC). Its absolute magnitude depends on local element size at that vertex and on the geometric stress concentration at the wall corner. The non-monotonic shape across t is consistent with the inlet-edge geometry changing slightly between the three thicknesses (the outer wall vertex sits at a different radial position) and with mesh-discretisation interactions at the singular point. It is not a quantity of engineering interest in this study — flagged here only for completeness.
+The singularity is constraint-driven (inlet vertex Y = 0 BC). Its absolute magnitude depends on local element size at that vertex and on the geometric stress concentration at the wall corner. The non-monotonic shape across t is consistent with the inlet-edge geometry changing slightly between the three thicknesses (the outer wall vertex sits at a different radial position) and with mesh-discretisation interactions at the singular point. It is not a quantity of engineering interest in this study; it is flagged here only for completeness.
 
 ---
 
-## 5. Critical Caveat — The Dirichlet BC Confound
+## 5. Critical Caveat: The Dirichlet BC Confound
 
 **The thermal-bending stress component identified in Section 3 is amplified by the Dirichlet thermal BC choice.** Imposing T_aw on the inner wall regardless of wall thickness is a deliberately conservative engineering choice, but it produces a stronger t-dependence in throat stress than would arise under a more physical BC.
 
-A higher-fidelity convection BC — applying the Bartz heat transfer coefficient h_g(x) to the inner wall and letting wall temperature equilibrate against an internal conductive resistance that scales with t — would give a different result:
+A higher-fidelity convection BC (applying the Bartz heat transfer coefficient h_g(x) to the inner wall and letting wall temperature equilibrate against an internal conductive resistance that scales with t) would give a different result:
 
 - Thicker wall → larger conductive resistance from inner to outer surface → cooler inner-wall temperature → smaller through-wall ΔT than Dirichlet predicts → smaller thermal-bending stress.
 - The t-dependence of throat σ_vM would compress.
 - The pressure hoop component (∝ 1/t) would dominate at the upper end of the thickness range, plausibly recovering the conventional "thinner wall = higher stress" trend.
 
-This is not speculation about future work — it is a known confound in the result documented here. The FoS values in Section 2.3 should not be quoted out of context as evidence that a thicker wall is structurally less safe than a thinner wall at this operating point. They are evidence of *the imposed-temperature BC's sensitivity to wall thickness*, which is partially a numerical-method effect.
+This is not speculation about future work. It is a known confound in the result documented here. The FoS values in Section 2.3 should not be quoted out of context as evidence that a thicker wall is structurally less safe than a thinner wall at this operating point. They are evidence of *the imposed-temperature BC's sensitivity to wall thickness*, which is partially a numerical-method effect.
 
 ### 5.1 What the FoS values do support
 
@@ -177,4 +177,4 @@ The FoS results in this document are upper-bound conservative for thin walls (t 
 
 This study was originally scoped as Future Work in the engineering report, then promoted to an executed Phase 5b after the data integrity correction cleared the upstream baseline. The decision to execute it surfaced a finding (the thermal-bending dominance of throat stress under Dirichlet BC) that strengthens the engineering report's discussion section: it gives the reader a concrete reason why a Bartz convection BC follow-up is needed, beyond a generic "higher fidelity is better" framing.
 
-The study also confirms what the pressure-only analytical estimate could not: that across a 2× range of wall thickness, **none of the configurations is yield-limited** at this operating point. That is the headline result. The non-monotonic σ_throat trend is the secondary finding that requires careful framing in the report — Section 5 of this document is the framing.
+The study also confirms what the pressure-only analytical estimate could not: that across a 2× range of wall thickness, **none of the configurations is yield-limited** at this operating point. That is the headline result. The non-monotonic σ_throat trend is the secondary finding that requires careful framing in the report; Section 5 of this document is the framing.
