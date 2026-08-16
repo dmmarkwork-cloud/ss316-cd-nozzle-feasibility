@@ -1,4 +1,4 @@
-# Thermal and Structural Feasibility of an Uncooled SS316 Conical Convergent-Divergent Nozzle and DFM Package
+# Thermal and Structural Feasibility of an Uncooled SS316 Conical Convergent-Divergent Nozzle and a DFM Package
 
 
 Multiphysics analysis of an uncooled stainless-steel converging-diverging nozzle. The study answers a single question: **can SS316 survive the combined thermal and pressure loading at the design operating point?**
