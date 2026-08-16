@@ -121,12 +121,13 @@ The data integrity correction shifted FoS by +3%; the engineering conclusion is 
 
 ## 8. Updated Limitations Table
 
-Adds L11 to the v2 limitations:
+Adds L11 to the v2 limitations (and L12, logged 2026-08-12 from the downstream DFM package):
 
 | # | Limitation | Impact | Mitigation |
 |---|---|---|---|
 | L1–L10 | Per Phase 4 v2 Section 11 | unchanged | unchanged |
 | L11 | Imported Load freshness: single-node CFD export variability between re-runs | ~3% on throat stress, ~3% on FoS | A3 architecture: Min/Max baseline values now recorded and checked pre-solve |
+| L12 | **Inlet-flange radial thermal gradient → low-cycle fatigue at the bore/fillet** (cyclic; distinct from throat-wall creep). First-order check (`Project_A/docs/phase4/thermal-gradient-calc.md`): elastic below ΔT ≈ 120 °C bore-to-OD, inner edge yields above. Actual ΔT unrun. | Fine for a few firings; life-limiting for repeated firing. | **Future work:** pin ΔT (thermal model or test thermocouple) + shakedown/LCF check (ASME VIII-2). If it governs, mitigate at bore fillet radius/finish (feeds DFM drawing CDN-001). |
 
 ---
 

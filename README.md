@@ -1,4 +1,4 @@
-# Thermal and Structural Feasibility of an Uncooled SS316 Conical Convergent-Divergent Nozzle
+# Thermal and Structural Feasibility of an Uncooled SS316 Conical Convergent-Divergent Nozzle and DFM Package
 
 
 Multiphysics analysis of an uncooled stainless-steel converging-diverging nozzle. The study answers a single question: **can SS316 survive the combined thermal and pressure loading at the design operating point?**
@@ -93,6 +93,38 @@ The one-way FSI uses Fluent wall outputs (static temperature, static pressure) m
 4. **Three independent boundary-condition errors** were caught and corrected during Phase 4 — most consequentially, a convection coefficient 6 orders of magnitude too high from a W/mm²·K vs W/m²·K unit mismatch in Mechanical. The pre-solve verification gate added in response to these errors is documented in `docs/Phase4_FEA_Summary_v2.md`
 
 ---
+## The Design for Manufacturing (DFM) Package
+
+The feasibility result above is only useful if the part can be made and inspected. The analysis is therefore carried into a **fabricable engineering package**: a GD&T'd, toleranced drawing set for the inlet joint, tolerance stack-ups that close against the frozen FEA geometry, a machining route, an inspection plan, a BOM, and a mock supplier RFQ.
+
+**Scope** is a short-duration, ground-test prototype, quantities 1 to 5. Drawing set is ASME Y14.5-2018, first-angle, A2, issued Revision C (2026-08-13).
+
+
+
+
+![Exploded view of the inlet joint assembly](dfm/images/exploded-view.png)
+*Inlet-joint assembly (CDN-000). Nozzle body, flexible-graphite gasket, mounting flange, 8 x M8 A286 floating fasteners.*
+
+| Sheet | Part | Key controls |
+|---|---|---|
+| [CDN-001](dfm/drawing/CDN-001.pdf) | C-D Nozzle Body | frozen internal contour by surface profile 0.2 A\|B + total runout 0.05 A\|B; throat wall **4 +0.3/0 (CTQ)**; pilot Ø92.80 g6 |
+| [CDN-002](dfm/drawing/CDN-002.pdf) | Mounting Flange | register bore Ø92.80 H7 with ⊥0.05 A; seat flatness 0.05 |
+| [CDN-000](dfm/drawing/CDN-000.pdf) | Inlet-joint Assembly | ballooned BOM, interface notes, bolt torque 6.8 N·m cold |
+
+
+### Four main decisions that carry this package
+
+1. **Pilot locates, bolts clamp.** A single Ø92.80 H7/g6 locational-clearance fit centres the flange (Datum B); the 8 x M8 fasteners float and only clamp, positioned at MMC.
+2. **The CTQ is the throat wall, and it is not a yield argument.** The 4 +0.3/0 band comes from creep life at ~530 °C, pressure-boundary minimum material, and machining minimum. The sensitivity study confirms the whole band is structurally free (FoS ≈ 40 across it), which is exactly why the tolerance had to be justified on other grounds.
+3. **The stacks close, with margin.** Worst-case 1-D concentricity 0.060 mm against a 0.10 mm limit (1.68x); the bolt pattern assembles at strict MMC with no reliance on bonus tolerance.
+4. **Every value is traceable.** Each dimension, tolerance and fit is tied to a source and a claim tier in the [value register](dfm/docs/value-register.md) and [`SOURCES.md`](dfm/sources/SOURCES.md), down to the gasket bolt load taken from ASME BPVC VIII-1 Mandatory Appendix 2.
+
+The package closes out with an inspection plan (including UT through-wall at the CTQ) and mock AS9102B FAIR forms for all three sheets.
+
+**Full package: [`dfm/README-dfm.md`](dfm/README-dfm.md)**
+
+---
+
 
 ## Scoping & limitations
 
@@ -100,6 +132,7 @@ Stated up front because they affect how the results should be read:
 
 - **No creep model.** The active scope boundary: yield is not the binding limit for sustained operation, and creep is flagged as required future work.
 - **Steady-state only.** No transient startup/shutdown or thermal-fatigue/cyclic loading; startup transients can produce higher peak loads than the steady operating point analyzed here. The short-duration-firing conclusion does not cover cyclic life.
+  - *Specific open instance (L12, 2026-08-12, from the DFM package):* the **inlet-flange radial thermal gradient** drives **low-cycle fatigue at the bore/fillet** (cyclic, distinct from the throat-wall creep above). First-order check (`Project_A/docs/phase4/thermal-gradient-calc.md`): elastic below ΔT ≈ 120 °C; actual ΔT unrun (needs a thermal model or test thermocouple, then a shakedown/LCF check). See FEA Summary v3 §8, L12.
 - **One-way FSI only.** No structural deformation feedback into CFD. Standard for preliminary analysis at this fidelity.
 - **Adiabatic-wall CFD → imposed T_aw on FEA.** Conservative; credits no wall-side conduction or radiation relief.
 - **2D axisymmetric.** No asymmetric loads. Acceptable for axisymmetric geometry and required by the license cell cap.
@@ -111,7 +144,7 @@ Stated up front because they affect how the results should be read:
 
 ```
 C-D-Nozzle/
-├── README.md                          # This file
+├── README.md                                           # This file
 ├── docs/
 │   ├── ss316_properties.md
 │   ├── Geometry_Freeze_Disposition.md                  # Frozen as-built contour + deviation disposition
@@ -120,7 +153,15 @@ C-D-Nozzle/
 │   ├── Phase4_FEA_Summary_v3.md
 │   ├── Phase5_Convergence_Study_v2.md
 │   └── Phase5b_Sensitivity_Study.md
-
+├──dfm/
+|   ├── calculations                                    # gasket loads, stack-up analysis and plot
+|   ├── docs                                            # drawing data, specs, plans, records,  registers, decisions
+|   ├── drawing                                         # official drawing sheets; CDN-000, CDN-001, CDN-002
+|   ├── fair                                            # first article inspection request forms
+|   ├── images                                          # isometric, inspection, and clash views
+|   ├── revisions                                       # drawing sheet revision block records
+|   ├── sources                                         # package source ledger (standards, materials, methods)
+|   └── README-dfm.md                                   # DFM package summary
 ├── notebooks/
 │   ├── cd-nozzle-handcalc-checkpoint.ipynb             # Phase 1
 │   ├── convergence_study_handcalc-checkpoint.ipynb     # Phase 5
