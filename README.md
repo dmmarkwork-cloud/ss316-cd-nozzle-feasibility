@@ -10,7 +10,7 @@ The short answer is yes against yield, with a FoS near 7 rather than the 42.7 re
 ---
 
 
-## Headline result
+## Headline results
 
 | Metric | Value | Source |
 |---|---|---|
