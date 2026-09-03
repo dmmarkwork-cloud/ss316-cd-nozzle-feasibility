@@ -161,7 +161,7 @@ Both reduce to one manufacturer enquiry. Neither changes the bolt sizing, and bo
 
 | Item | Status |
 |---|---|
-| **527 °C air rating** | Datasheet maximum is 580 °C with oxidation ≤ 1 %/h at 670 °C, but it says "consult manufacturer above 480 °C." Confined-air service at 527 °C needs a one-line confirmation. |
+| **527 °C air rating** | Datasheet maximum is 580 °C with oxidation ≤ 2 %/h at 670 °C, but it says "consult manufacturer above 480 °C." Confined-air service at 527 °C needs a one-line confirmation. |
 | **Binding design values** | The published m/y are "typical, non-binding; contact technical sales for design." Adequate for a portfolio package at T2; obtain binding values for real procurement. |
 
 ---

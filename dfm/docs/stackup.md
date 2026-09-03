@@ -2,7 +2,7 @@
 
 Three worst-case stacks close the drawing package against the frozen analysis and against assembly.
 
-All arithmetic is reproduced by [`stackup-analysis.py`](../calculations/stackup-analysis.py); the summary figure is regenerated from the same primitive inputs by [`plot_stackups.py`](../calculations/plot_stackups.py).
+All arithmetic is reproduced by [`stackup-analysis.ipynb`](../calculations/stackup-analysis.ipynb); the summary figure is regenerated from the same primitive inputs by [`plot_stackups.ipynb`](../calculations/plot_stackups.ipynb).
 
 ![Stack-up summary](../images/stackup-summary.png)
 
@@ -109,7 +109,7 @@ The analyzed 4.00 mm is the guaranteed minimum, so variation adds material only 
 | # | Contributor | Value (radial) | Source · tier |
 |---|---|---:|---|
 | 1 | Pilot fit float, Ø92.80 H7/g6, cmax = +0.069 mm diametral | **0.0345 mm** | ISO 286-2, 80–120 mm step · **T1** |
-| 2 | Body throat-to-pilot total runout, ⌀0.05 TIR | **0.0250 mm** | FCF #7 · **T3 (value)** |
+| 2 | Body throat-to-pilot total runout, ⌀0.05 TIR | **0.0250 mm** | FCF #6 · **T3 (value)** |
 | | **Worst-case sum** | **0.0595 ≈ 0.060 mm** | **T2 arithmetic** |
 
 **Fit derivation.** H7 = +0 / +0.035, g6 = −0.012 / −0.034.

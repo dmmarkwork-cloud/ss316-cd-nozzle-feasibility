@@ -1,0 +1,469 @@
+
+Boundary Conditions                          
+-------------------                          
+
+  Axis                                       
+  ----                                         
+
+    axis-chamber                             
+    ------------                                 
+
+    axis-converging                          
+    ---------------                              
+
+    axis-diverging                           
+    --------------                               
+
+    axis-throat-curve                        
+    -----------------                            
+
+  Interior                                   
+  --------                                     
+
+    fff_surface                              
+    -----------                                  
+
+      Interior                               
+      --------                                     
+
+  Pressure Inlet                             
+  --------------                               
+
+    inlet                                    
+    -----                                        
+
+      Momentum                               
+      --------                                     
+
+        Reference Frame                       : Absolute
+
+        Gauge Total Pressure                 
+        --------------------                         
+
+          Option                              : value
+
+          Value                               : 2000000 [Pa]
+
+        Supersonic/Initial Gauge Pressure    
+        ---------------------------------            
+
+          Option                              : value
+
+          Value                               : 1993000 [Pa]
+
+        Direction Specification Method        : Normal to Boundary
+
+        Prevent Reverse Flow                  : False
+
+      Turbulence                             
+      ----------                                   
+
+        Specification Method                  : Intensity and Viscosity Ratio
+
+        Turbulent Intensity                   : 5 [%]
+
+        Turbulent Viscosity Ratio             : 10
+
+      Thermal                                
+      -------                                      
+
+        Total Temperature                    
+        -----------------                            
+
+          Option                              : value
+
+          Value                               : 800 [K]
+
+  Pressure Outlet                            
+  ---------------                              
+
+    outlet                                   
+    ------                                       
+
+      Momentum                               
+      --------                                     
+
+        Backflow Reference Frame              : Absolute
+
+        Gauge Pressure                       
+        --------------                               
+
+          Option                              : value
+
+          Value                               : 60000 [Pa]
+
+        Pressure Profile Multiplier           : 1
+
+        Backflow Direction Specification Method-2_ : Normal to Boundary
+
+        Backflow Pressure Specification       : Static Pressure
+
+        Prevent Reverse Flow                  : False
+
+        Average Pressure Specification        : False
+
+        Target Mass Flow Rate                 : False
+
+        Acoustic Wave Model                   : Off
+
+      Turbulence                             
+      ----------                                   
+
+        Specification Method                  : Intensity and Viscosity Ratio
+
+        Backflow Turbulent Intensity          : 5 [%]
+
+        Backflow Turbulent Viscosity Ratio    : 10
+
+      Thermal                                
+      -------                                      
+
+        Backflow Total Temperature           
+        --------------------------                   
+
+          Option                              : value
+
+          Value                               : 300 [K]
+
+  Wall                                       
+  ----                                         
+
+    chamber                                  
+    -------                                      
+
+      Momentum                               
+      --------                                     
+
+        Wall Motion                           : Stationary Wall
+
+        Shear Condition                       : No Slip
+
+      Turbulence                             
+      ----------                                   
+
+        Roughness Model                       : Standard
+
+        Roughness Height                     
+        ----------------                             
+
+          Option                              : value
+
+          Value                               : 0 [m]
+
+        Roughness Constant                   
+        ------------------                           
+
+          Option                              : value
+
+          Value                               : 0.5
+
+      Thermal                                
+      -------                                      
+
+        Thermal Conditions                    : Heat Flux
+
+        Material Name                         : aluminum
+
+        Heat Flux                            
+        ---------                                    
+
+          Option                              : value
+
+          Value                               : 0 [W/m^2]
+
+        Wall Thickness                       
+        --------------                               
+
+          Option                              : value
+
+          Value                               : 0 [m]
+
+        Heat Generation Rate                 
+        --------------------                         
+
+          Option                              : value
+
+          Value                               : 0 [W/m^3]
+
+        Convective Augmentation Factor       
+        ------------------------------               
+
+          Option                              : value
+
+          Value                               : 1
+
+    converging                               
+    ----------                                   
+
+      Momentum                               
+      --------                                     
+
+        Wall Motion                           : Stationary Wall
+
+        Shear Condition                       : No Slip
+
+      Turbulence                             
+      ----------                                   
+
+        Roughness Model                       : Standard
+
+        Roughness Height                     
+        ----------------                             
+
+          Option                              : value
+
+          Value                               : 0 [m]
+
+        Roughness Constant                   
+        ------------------                           
+
+          Option                              : value
+
+          Value                               : 0.5
+
+      Thermal                                
+      -------                                      
+
+        Thermal Conditions                    : Heat Flux
+
+        Material Name                         : aluminum
+
+        Heat Flux                            
+        ---------                                    
+
+          Option                              : value
+
+          Value                               : 0 [W/m^2]
+
+        Wall Thickness                       
+        --------------                               
+
+          Option                              : value
+
+          Value                               : 0 [m]
+
+        Heat Generation Rate                 
+        --------------------                         
+
+          Option                              : value
+
+          Value                               : 0 [W/m^3]
+
+        Convective Augmentation Factor       
+        ------------------------------               
+
+          Option                              : value
+
+          Value                               : 1
+
+    diverging                                
+    ---------                                    
+
+      Momentum                               
+      --------                                     
+
+        Wall Motion                           : Stationary Wall
+
+        Shear Condition                       : No Slip
+
+      Turbulence                             
+      ----------                                   
+
+        Roughness Model                       : Standard
+
+        Roughness Height                     
+        ----------------                             
+
+          Option                              : value
+
+          Value                               : 0 [m]
+
+        Roughness Constant                   
+        ------------------                           
+
+          Option                              : value
+
+          Value                               : 0.5
+
+      Thermal                                
+      -------                                      
+
+        Thermal Conditions                    : Heat Flux
+
+        Material Name                         : aluminum
+
+        Heat Flux                            
+        ---------                                    
+
+          Option                              : value
+
+          Value                               : 0 [W/m^2]
+
+        Wall Thickness                       
+        --------------                               
+
+          Option                              : value
+
+          Value                               : 0 [m]
+
+        Heat Generation Rate                 
+        --------------------                         
+
+          Option                              : value
+
+          Value                               : 0 [W/m^3]
+
+        Convective Augmentation Factor       
+        ------------------------------               
+
+          Option                              : value
+
+          Value                               : 1
+
+    throat-curve                             
+    ------------                                 
+
+      Momentum                               
+      --------                                     
+
+        Wall Motion                           : Stationary Wall
+
+        Shear Condition                       : No Slip
+
+      Turbulence                             
+      ----------                                   
+
+        Roughness Model                       : Standard
+
+        Roughness Height                     
+        ----------------                             
+
+          Option                              : value
+
+          Value                               : 0 [m]
+
+        Roughness Constant                   
+        ------------------                           
+
+          Option                              : value
+
+          Value                               : 0.5
+
+      Thermal                                
+      -------                                      
+
+        Thermal Conditions                    : Heat Flux
+
+        Material Name                         : aluminum
+
+        Heat Flux                            
+        ---------                                    
+
+          Option                              : value
+
+          Value                               : 0 [W/m^2]
+
+        Wall Thickness                       
+        --------------                               
+
+          Option                              : value
+
+          Value                               : 0 [m]
+
+        Heat Generation Rate                 
+        --------------------                         
+
+          Option                              : value
+
+          Value                               : 0 [W/m^3]
+
+        Convective Augmentation Factor       
+        ------------------------------               
+
+          Option                              : value
+
+          Value                               : 1
+
+  Non-Reflecting BC                          
+  -----------------                            
+
+    General NRBC                             
+    ------------                                 
+
+      Sigma                                   : 0.15
+
+      Sigma2                                  : 5
+
+    Turbo-specific NRBC                      
+    -------------------                          
+
+      Enable                                  : False
+
+  Perforated Wall                            
+  ---------------                              
+
+    Setup Method                              : None
+
+    Model Setup                              
+    -----------                                  
+
+      Injection Explicit Relaxation Factor    : 1
+
+      Injection                              
+      ---------                                    
+
+        1                                    
+        -                                            
+
+          Injection Thread                    : #f
+
+          Coupled with Extraction Side        : True
+
+          Extraction Thread                   : #f
+
+          Injection Type                      : Uniform
+
+          Injection Method                    : Dynamic
+
+          Formulation                         : Incompressible
+
+          Dynamic Setup                      
+          -------------                                
+
+            Method                            : 
+
+  Settings                                   
+  --------                                     
+
+    Mass Flow                                 : True
+
+    Pressure Outlet                          
+    ---------------                              
+
+      Blending Factor                         : 0
+
+      Bin Count                               : 65
+
+      Average Pressure                        : False
+
+    Pressure Far Field                       
+    ------------------                           
+
+      Riemann Invariants Tangency Correction  : True
+
+      Type                                    : Riemann-invariants
+
+    Target Mass Flow Rate Settings           
+    ------------------------------               
+
+      Under Relaxation Factor                 : 0.05
+
+      Verbosity                               : False
+
+    Advanced                                 
+    --------                                     
+
+      Delay Model Change Update               : False
+
+      Batch Thread Update                     : False
+

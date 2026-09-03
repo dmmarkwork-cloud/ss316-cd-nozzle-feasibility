@@ -126,8 +126,7 @@ Effective width and reaction diameter per Table 2-5.2 (flat gasket, sketch 1a/1b
 - Hot **0.2 % yield ≈ 582 MPa @ 527 °C**, interpolated between 595 @ 425 °C and 580 @ 540 °C. **(T2)** This is the governing sizing basis. Source is the TorqBolt published property table for the solution-980 °C / age-720 °C condition, which is the AMS 5732 condition on the BOM; AMS 5732 itself publishes no elevated-temperature curve. These are vendor **typical** values, not guaranteed minima. A minimum basis near ~520 MPa leaves bolt sizing unaffected. See **S14**.
 - **CTE = 16.9 × 10⁻⁶/°C** (21–540 °C), close to SS316 (~16.5–18), so the register fit and preload hold through the thermal cycle. **(T2)**
 - **Creep negligible:** onset ~380 MPa @ 540 °C (1 %/1000 h) against a preload stress of **~157 MPa**, a factor of ~2.4 below. **(T2)**
-- ASME **II-D allowable ~190 MPa** used only as a *conservative sizing screen* (1.67× cover). **Non-governing**, so the exact II-D row is not adopted and nothing published depends on it. **(T3)**
-7 °C value would be an extrapolation past the rated temperature, which is not defensible.
+- **A4-70 rejected:** ISO 3506 rates it only to ~300 °C; a 527 °C value would be an extrapolation past the rated temperature, which is not defensible.
 
 ----
 
@@ -135,13 +134,13 @@ Effective width and reaction diameter per Table 2-5.2 (flat gasket, sketch 1a/1b
 
 **8 × M8 A286** on the Ø128 bolt circle.
 
-$$A_b = 8 \times 36.6 = 293 \text{ mm}^2 \qquad A_{\text{req}} = \frac{33\,400}{190} = 176 \text{ mm}^2 \qquad \text{margin} = 1.67\times$$
+$$A_b = 8 \times 36.6 = 293 \text{ mm}^2$$
 
 $$\sigma_{\text{applied}} = \frac{33\,400}{293} = 114 \text{ MPa} = 20\% \text{ of the 582 MPa hot yield}$$
 
 $$F_0 = \frac{1.4\,W_{m1}}{8} = 5.7 \text{ kN/bolt} \quad\Rightarrow\quad \sigma_0 = \frac{5700}{36.6} = 157 \text{ MPa} = 27\% \text{ of hot yield}$$
 
-Bolt spacing 6.2 × d (48.98 mm chord between adjacent holes on the Ø128 circle). Sized to a **35 kN envelope** so any qualifying reinforced-graphite grade lands inside it and a gasket substitution cannot silently invalidate the calculation.
+Bolt spacing **6.28 × d** on the Ø128 circle, taken on the 50.27 mm arc pitch, which is the pitch the TEMA check in D-2 consumes (the chord between adjacent holes is 48.98 mm = 6.12 × d). Sized to a **35 kN envelope** so any qualifying reinforced-graphite grade lands inside it and a gasket substitution cannot silently invalidate the calculation.
 
 **Eight chosen over more or fewer** to serve the frequent-disassembly priority (few fasteners to service) while keeping gasket-stress distribution acceptable.
 
@@ -222,7 +221,7 @@ Path A holds provided its conditions do: an oxidation- **and** corrosion-inhibit
 | C-5 method, ASME App-2 | **T1** | verified verbatim vs the 2021 code |
 | C-5 m, y, design load | **T2** | APX2 HOCHDRUCK datasheet → governing 33.4 kN |
 | C-6 A286 hot properties | **T2** | datasheet |
-| C-6 ASME II-D allowable | **T3** | non-governing conservative screen, not adopted |
+| C-6 ASME II-D allowable | — | omitted; untraceable to a primary source, was non-governing |
 | D-1 bolt sizing | **T2 / T3** | calculation / choice |
 | D-2 flange geometry | **T3** | design + TEMA method flag; thickness **held at 15 mm** at m = 2.5, §D-2 |
 | D-2 position tol ⌀0.9 Ⓜ | **T2** | T = (H − F) − 2·e_pilot, bonus-independent |
@@ -245,6 +244,6 @@ Path A holds provided its conditions do: an oxidation- **and** corrosion-inhibit
 - **S14** A286 / ASTM A453 Gr 660:
     - hot yield / CTE / creep vs temperature from the TorqBolt published property table, solution-980 °C / age-720 °C condition = the AMS 5732 condition; vendor typical values, not minima. The governing sizing basis
     - AMS 5732 cited for the material spec and heat-treatment condition only; it publishes no elevated-temperature yield curve
-    - ASME BPVC II-D allowable, non-governing screen, not adopted; Table Y-1 is the T1 upgrade path
+    - ASME BPVC II-D allowable, omitted (untraceable to primary source); Table Y-1 remains the T1 upgrade path for the hot-yield figure
 - **S15** flexible-graphite oxidation limits:
     - air vs confined service, inhibited grades

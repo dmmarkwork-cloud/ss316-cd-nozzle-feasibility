@@ -34,7 +34,7 @@ Authority is the frozen STEP and [`Geometry_Freeze_Disposition.md`](../../docs/G
 |---|---|---|---|---|
 | <a id="v-throat-wall"></a>V-THROAT-WALL | Throat wall 4 +0.3 / 0 mm, protect-minimum. CTQ | value T1 / band T3 | S11 | [`stackup.md`](stackup.md) §1 |
 | <a id="v-spigot"></a>V-SPIGOT | Spigot projection 4.75 mm, general ±0.10 | T3 | design | [`inlet-joint-design-record.md`](inlet-joint-design-record.md) C-1 |
-| <a id="v-engagement"></a>V-ENGAGEMENT | Register engagement 2.5 mm seated, 2.30 mm worst case | T3 | assembly | [`inlet-joint-design-record.md`](inlet-joint-design-record.md) C-1 |
+| <a id="v-engagement"></a>V-ENGAGEMENT | Register engagement 2.5 mm, 2.30 mm worst case | 2.5 T3 (design) / 2.30 T2 (derived) | assembly | [`inlet-joint-design-record.md`](inlet-joint-design-record.md) C-1 · [`stackup.md`](stackup.md) §3.2 |
 | <a id="v-recess"></a>V-RECESS | Recess depth 4.5 mm, general ±0.10 | T3 | stack | [`stackup.md`](stackup.md) §3 |
 | <a id="v-chamfer"></a>V-CHAMFER | Recess-mouth chamfer 0.75 × 45°; recess-floor corner R0.5 to R1 | T3 | design | [`drawing-data.md`](drawing-data.md) §5 |
 | <a id="v-fillet"></a>V-FILLET | Spigot/seat corner fillet R1.5, bounded R0.8 to R2 | T3 | design | [`inlet-joint-design-record.md`](inlet-joint-design-record.md) C-1 |
@@ -95,7 +95,6 @@ $$T = H - F = 9.0 - 8.0 = 1.0 \text{ mm at MMC} \qquad T_{\text{safe}} = (H - F)
 | <a id="v-hot-yield"></a>V-HOT-YIELD | A286 hot 0.2 % yield 582 MPa at 527 °C, between 595 @ 425 °C and 580 @ 540 °C. Vendor typical, not minima | T2 | S14 | [`inlet-joint-design-record.md`](inlet-joint-design-record.md) C-6 |
 | <a id="v-a286-cte"></a>V-A286-CTE | A286 CTE 16.9 × 10⁻⁶/°C (21 to 540 °C) against SS316 ~16.5 to 18 | T2 | S14 | [`inlet-joint-design-record.md`](inlet-joint-design-record.md) C-6 |
 | <a id="v-a286-creep"></a>V-A286-CREEP | Creep onset ~380 MPa at 540 °C (1 %/1000 h) | T2 | S14 | [`inlet-joint-design-record.md`](inlet-joint-design-record.md) C-6 |
-| <a id="v-screen"></a>V-SCREEN | ASME II-D allowable ~190 MPa as a sizing screen: Areq 176 mm², margin 1.67×. Non-governing, not adopted | T3 | S14 | [`inlet-joint-design-record.md`](inlet-joint-design-record.md) C-6, D-1 |
 | <a id="v-applied"></a>V-APPLIED | Applied bolt stress 114 MPa = 20 % of hot yield | T2 | derived | [`inlet-joint-design-record.md`](inlet-joint-design-record.md) D-1 |
 | <a id="v-preload"></a>V-PRELOAD | Preload F0 = 1.4·Wm1/8 = 5.7 kN/bolt → 157 MPa = 27 % of hot yield (45.8 kN total) | T2 | derived | [`inlet-joint-design-record.md`](inlet-joint-design-record.md) D-1 |
 | <a id="v-torque"></a>V-TORQUE | Torque T = k·F0·d = 6.8 N·m (60 lbf·in) cold at nickel anti-seize k ≈ 0.15 | T2 | derived | [`inlet-joint-design-record.md`](inlet-joint-design-record.md) D-1 |
@@ -192,7 +191,7 @@ $$\text{gap} = D_{\text{recess}} - (S_{\text{spigot}} - g_{\text{compressed}}) =
 - **S13** ASME BPVC VIII-1 Mandatory Appendix 2 and the SIGRAFLEX APX2 HOCHDRUCK V15011W3 datasheet:
     - eq (1)/(2), Table 2-5.2, m and y factors
 - **S14** A286 / ASTM A453 Gr 660:
-    - hot yield, CTE, creep; ASME BPVC II-D as a non-governing screen
+    - hot yield, CTE, creep
 - **S15** flexible-graphite oxidation limits
 - **S16** thermal-gradient and bolted-joint thermal load references
 - **S17** ASTM A967 passivation
