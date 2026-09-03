@@ -111,7 +111,7 @@ The one-way FSI uses Fluent wall outputs (static temperature, static pressure) m
 
 2. **Bending dominates, and increasing thickness improves FoS, reversing the v1.0 trend.** Bending contributes 71 to 77% of M+B. Junction FoS is 4.62 / 7.12 / 10.18 for t = 3 / 4 / 5 mm. The v1.0 throat FoS values of 53.27 / 42.70 / 33.96 are withdrawn. Thermal bending is real but contributes only 4 to 16% at the junction. At the throat, the pressure state is anticlastic and nearly stress-free, leaving thermal stress as the dominant component there.
 
-3.**The governing metric does not converge monotonically, so the result is reported as a band.** Governing von Mises M+B changes only −0.08% then −1.25% across J1/J2/J3.
+3. **The governing metric does not converge monotonically, so the result is reported as a band.** Governing von Mises M+B changes only −0.08% then −1.25% across J1/J2/J3.
 
 4. **Steady-state thermal loading is small.** Natural convection accounts for 99.64% of the thermal resistance. Of the available 500 K wall-to-ambient difference, approximately 498 K occurs across the external film and only ~1 K across the wall.
 
