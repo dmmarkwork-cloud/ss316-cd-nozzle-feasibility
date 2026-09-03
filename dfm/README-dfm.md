@@ -8,9 +8,9 @@ Drawing set = **ASME Y14.5-2018, first-angle, A2, issued Rev C (2026-08-13)**:
 
 | Sheet | Part | Key controls |
 |---|---|---|
-| [CDN-001](dfm/drawing/CDN-001.pdf) | C-D Nozzle Body | frozen internal contour by **surface profile 0.2 A\|B + total runout 0.05 A\|B**; throat wall **4 +0.3/0 CTQ**; pilot Ø92.80 **g6** (Datum B); 8× Ø9 +0.22/0 on Ø128 basic, position **⌀0.9 Ⓜ A\|B** |
-| [CDN-002](dfm/drawing/CDN-002.pdf) | Mounting Flange | register bore Ø92.80 **H7** (Datum B) with **⊥0.05 A**; recess 4.5 (tip-floor stack); matching bolt pattern; seat **flatness 0.05**, outboard face **∥0.05 A** |
-| [CDN-000](dfm/drawing/CDN-000.pdf) | Inlet-joint Assembly | ballooned BOM + interface notes; bolt torque **6.8 N·m** cold, nickel anti-seize; gasket as replaceable consumable |
+| [CDN-001](drawing/CDN-001.pdf) | C-D Nozzle Body | frozen internal contour by **surface profile 0.2 A\|B + total runout 0.05 A\|B**; throat wall **4 +0.3/0 CTQ**; pilot Ø92.80 **g6** (Datum B); 8× Ø9 +0.22/0 on Ø128 basic, position **⌀0.9 Ⓜ A\|B** |
+| [CDN-002](drawing/CDN-002.pdf) | Mounting Flange | register bore Ø92.80 **H7** (Datum B) with **⊥0.05 A**; recess 4.5 (tip-floor stack); matching bolt pattern; seat **flatness 0.05**, outboard face **∥0.05 A** |
+| [CDN-000](drawing/CDN-000.pdf) | Inlet-joint Assembly | ballooned BOM + interface notes; bolt torque **6.8 N·m** cold, nickel anti-seize; gasket as replaceable consumable |
 
 ## Key Decisions
 

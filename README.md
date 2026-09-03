@@ -28,7 +28,7 @@ The short answer is yes against yield, with a FoS near 7 rather than the 42.7 re
 | Discharge coefficient | 0.977 | Report §4.4 |
 
 ![Mach number contour from the converged Fluent solution](cfd/figures/mach-contour.png)
-**Mach number** contour from the converged Fluent solution Mach number contour, converged Fluent solution on the structured 88,800-cell mesh. Area-weighted exit Mach 2.87 against hand-calc 2.94, within 3.1% (validation gate passed). Peak 2.98 is the inviscid core value, not the bulk exit.
+**Mach number** contour from the converged Fluent solution Mach number contour, converged Fluent solution on the structured 88,800-cell mesh. Area-weighted exit Mach 2.85 against hand-calc 2.94, within 3.1% (validation gate passed). Peak 2.98 is the inviscid core value, not the bulk exit.
 
 ![Nozzle half-section dimensions](cad/cad_dimensions.png)
 **Nozzle half-section dimensions (mm)**. Throat radius 15 (nominal; as-built minimum 14.942 at −0.77 % area (see Geometry Freeze Disposition), exit radius 30 (ε = 4). Divergent side: 14.8° throat-to-exit chord angle (the straight diverging segment itself is 14.91°). Convergent side: a straight 47.43° taper from the chamber blended into the throat through an R22.5 arc. 4 mm wall.
